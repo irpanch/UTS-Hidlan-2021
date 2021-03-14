@@ -33,7 +33,59 @@ plotLfit(dlf_Eto,legend = T,col = "aquamarine", main = "Grafik PDF Evapotranspir
 plotLfit(dlf_Eto, cdf=TRUE, main = "Grafik CDF Evapotranspirasi Potensial Harian", xlab="Eto (mm)")
 
 
+# cari FDC, exceedance probabilty 80%, 90%, dan 95%
+sort_hujan <- sort(data_filter$P,decreasing = T)
+sort_debit <- sort(data_debit_eto$Debit,decreasing = T)
+sort_eto <- sort(data_debit_eto$Eto,decreasing = T)
 
+## buat data frame dimana kolom x adalah prosentase dan kolom y adalah variabel
+df_hujan <- data.frame(x=100/length(sort_hujan)*1:length(sort_hujan),y=sort_hujan)
+df_debit<- data.frame(x=100/length(sort_debit)*1:length(sort_debit),y=sort_debit)
+df_eto<- data.frame(x=100/length(sort_eto)*1:length(sort_eto),y=sort_eto)
+
+
+## plot
+plot(x = df_hujan$x, y = df_hujan$y, type = "l", log = "y",ylab="Hujan (mm)",
+     xlab="Exceedance Probabilty (%)",main="Flow Duration Curve - Hujan Jam-jaman")
+grid()
+plot(x = df_debit$x, y = df_debit$y, type = "l", log = "y",ylab="Debit (m^3/dtk)",
+     xlab="Exceedance Probabilty (%)",main="Flow Duration Curve - Debit Harian")
+grid()
+plot(x = df_eto$x, y = df_eto$y, type = "l", log = "y",ylab="Eto (mm)",
+     xlab="Exceedance Probabilty (%)",main="Flow Duration Curve - Eto Harian")
+grid()
+
+## cari Q80, Q90, dan Q95%
+### data hujan
+x_h=df_hujan$x
+y_h=df_hujan$y
+percentage=c(80,90,95)
+ep_hujan=c(y_h[which.min(abs(x_h - 80))],
+         y_h[which.min(abs(x_h - 90))],y_h[which.min(abs(x_h - 95))])
+duration.dataframe.h<-cbind(percentage,ep_hujan)
+colnames(duration.dataframe.h)=c("%","Hujan (mm)")
+duration.dataframe.h
+
+### data debit
+x_d=df_debit$x
+y_d=df_debit$y
+ep_debit=c(y_d[which.min(abs(x_d - 80))],
+           y_d[which.min(abs(x_d - 90))],y_d[which.min(abs(x_d - 95))])
+duration.dataframe.d<-cbind(percentage,ep_debit)
+colnames(duration.dataframe.d)=c("%","Debit (m^3/dtk)")
+duration.dataframe.d
+
+### data eto
+x_e=df_eto$x
+y_e=df_eto$y
+ep_debit=c(y_e[which.min(abs(x_e - 80))],
+           y_e[which.min(abs(x_e - 90))],y_e[which.min(abs(x_e - 95))])
+duration.dataframe.e<-cbind(percentage,ep_debit)
+colnames(duration.dataframe.e)=c("%","Eto (mm)")
+duration.dataframe.e
+
+
+# cari debit banjir 
 dle <- distLextreme(dlf=dlf, RPs=c(2,10,100), gpd=F)
 plotLextreme(dle)
 plotLextreme(dle, nbest=6, log=TRUE,ylab="Debit (m^3/dtk)",xlab="Periode Kala Ulang (Tahun)",
