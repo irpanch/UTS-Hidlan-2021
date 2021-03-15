@@ -86,7 +86,97 @@ duration.dataframe.e
 
 
 # cari debit banjir 
+Debit_Max_Harian <- tapply(data_debit_eto$Debit,data_debit_eto$Tanggal, max, na.rm=TRUE)
+dlf <- distLfit(Debit_Max_Harian)
 dle <- distLextreme(dlf=dlf, RPs=c(2,10,100), gpd=F)
-plotLextreme(dle)
 plotLextreme(dle, nbest=6, log=TRUE,ylab="Debit (m^3/dtk)",xlab="Periode Kala Ulang (Tahun)",
-             main=c("Analisa Frekuensi",nama_pos),legargs = list(cex=0.6,bg="transparent"))
+             main=c("Analisa Frekuensi Debit Banjir",nama_pos),legargs = list(cex=0.6,bg="transparent"))
+dle$returnlev
+
+
+# Analisa frekuensi IDF Tr=5 Tahun
+## import data
+library(readr)
+rekap_menitan <- read_csv("rekap_menitan.csv")
+
+# untuk durasi 5 menit
+tr_5 <- rekap_menitan$d_5menit
+dlf <- distLfit(tr_5)
+dle <- distLextreme(dlf=dlf, RPs=c(5), gpd=F)
+plotLextreme(dle, nbest=6, log=TRUE,ylab="Hujan (mm)",xlab="Periode Kala Ulang (Tahun)",
+             main=c("Analisa Frekuensi Hujan Rencana - Durasi 5 Menit","Geofisika Bandung"),legargs = list(cex=0.6,bg="transparent"))
+dle$returnlev
+ 
+# untuk durasi 10 menit
+tr_10 <- rekap_menitan$d_10menit
+dlf <- distLfit(tr_10)
+dle <- distLextreme(dlf=dlf, RPs=c(5), gpd=F)
+plotLextreme(dle, nbest=6, log=TRUE,ylab="Hujan (mm)",xlab="Periode Kala Ulang (Tahun)",
+             main=c("Analisa Frekuensi Hujan Rencana - Durasi 10 Menit","Geofisika Bandung"),legargs = list(cex=0.6,bg="transparent"))
+dle$returnlev
+
+# untuk durasi 15 menit
+tr_15 <- rekap_menitan$d_15menit
+dlf <- distLfit(tr_15)
+dle <- distLextreme(dlf=dlf, RPs=c(5), gpd=F)
+plotLextreme(dle, nbest=6, log=TRUE,ylab="Hujan (mm)",xlab="Periode Kala Ulang (Tahun)",
+             main=c("Analisa Frekuensi Hujan Rencana - Durasi 15 Menit","Geofisika Bandung"),legargs = list(cex=0.6,bg="transparent"))
+dle$returnlev
+
+# untuk durasi 30 menit
+tr_30 <- rekap_menitan$d_30menit
+dlf <- distLfit(tr_30)
+dle <- distLextreme(dlf=dlf, RPs=c(5), gpd=F)
+plotLextreme(dle, nbest=6, log=TRUE,ylab="Hujan (mm)",xlab="Periode Kala Ulang (Tahun)",
+             main=c("Analisa Frekuensi Hujan Rencana - Durasi 30 Menit","Geofisika Bandung"),legargs = list(cex=0.6,bg="transparent"))
+dle$returnlev
+
+# untuk durasi 45 menit
+tr_45 <- rekap_menitan$d_45menit
+dlf <- distLfit(tr_45)
+dle <- distLextreme(dlf=dlf, RPs=c(5), gpd=F)
+plotLextreme(dle, nbest=6, log=TRUE,ylab="Hujan (mm)",xlab="Periode Kala Ulang (Tahun)",
+             main=c("Analisa Frekuensi Hujan Rencana - Durasi 45 Menit","Geofisika Bandung"),legargs = list(cex=0.6,bg="transparent"))
+dle$returnlev
+
+# untuk durasi 60 menit
+tr_60 <- rekap_menitan$d_60menit
+dlf <- distLfit(tr_60)
+dle <- distLextreme(dlf=dlf, RPs=c(5), gpd=F)
+plotLextreme(dle, nbest=6, log=TRUE,ylab="Hujan (mm)",xlab="Periode Kala Ulang (Tahun)",
+             main=c("Analisa Frekuensi Hujan Rencana - Durasi 60 Menit","Geofisika Bandung"),legargs = list(cex=0.6,bg="transparent"))
+dle$returnlev
+
+# untuk durasi 120 menit
+tr_120 <- rekap_menitan$d_120menit
+dlf <- distLfit(tr_120)
+dle <- distLextreme(dlf=dlf, RPs=c(5), gpd=F)
+plotLextreme(dle, nbest=6, log=TRUE,ylab="Hujan (mm)",xlab="Periode Kala Ulang (Tahun)",
+             main=c("Analisa Frekuensi Hujan Rencana - Durasi 120 Menit","Geofisika Bandung"),legargs = list(cex=0.6,bg="transparent"))
+dle$returnlev
+
+# untuk durasi 180 menit
+tr_180 <- rekap_menitan$d_180menit
+dlf <- distLfit(tr_180)
+dle <- distLextreme(dlf=dlf, RPs=c(5), gpd=F)
+plotLextreme(dle, nbest=6, log=TRUE,ylab="Hujan (mm)",xlab="Periode Kala Ulang (Tahun)",
+             main=c("Analisa Frekuensi Hujan Rencana - Durasi 180 Menit","Geofisika Bandung"),legargs = list(cex=0.6,bg="transparent"))
+dle$returnlev
+
+# untuk durasi 360 menit
+tr_360 <- rekap_menitan$d_360menit
+dlf <- distLfit(tr_360)
+dle <- distLextreme(dlf=dlf, RPs=c(5), gpd=F)
+plotLextreme(dle, nbest=6, log=TRUE,ylab="Hujan (mm)",xlab="Periode Kala Ulang (Tahun)",
+             main=c("Analisa Frekuensi Hujan Rencana - Durasi 360 Menit","Geofisika Bandung"),legargs = list(cex=0.6,bg="transparent"))
+dle$returnlev
+
+# untuk durasi 720 menit
+tr_720 <- rekap_menitan$d_720menit
+dlf <- distLfit(tr_720)
+dle <- distLextreme(dlf=dlf, RPs=c(5), gpd=F)
+plotLextreme(dle, nbest=6, log=TRUE,ylab="Hujan (mm)",xlab="Periode Kala Ulang (Tahun)",
+             main=c("Analisa Frekuensi Hujan Rencana - Durasi 720 Menit","Geofisika Bandung"),legargs = list(cex=0.6,bg="transparent"))
+dle$returnlev
+
+
